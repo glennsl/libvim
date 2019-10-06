@@ -336,6 +336,14 @@ void vimSetClipboardGetCallback(ClipboardGetCallback callback)
 
 int vimGetMode(void) { return get_real_state(); }
 
+cmdarg_T *vimGetCommandState(void) {
+  if (state_current->mode == NORMAL) {
+    return &((normalCmd_T *)state_current->context)->ca;
+  } else {
+    return NULL;
+  }
+}
+
 void vimSetDisplayIntroCallback(VoidCallback callback)
 {
   displayIntroCallback = callback;

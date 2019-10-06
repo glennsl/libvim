@@ -197,6 +197,7 @@ void vimSetWindowMovementCallback(WindowMovementCallback callback);
 void vimSetClipboardGetCallback(ClipboardGetCallback callback);
 
 int vimGetMode(void);
+cmdarg_T *vimGetCommandState(void);
 
 void vimSetYankCallback(YankCallback callback);
 

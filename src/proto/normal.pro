@@ -1,5 +1,37 @@
 /* normal.c */
 
+typedef enum
+{
+  NORMAL_INITIAL,
+  NORMAL_START_COUNT,
+  NORMAL_COUNT,
+  NORMAL_END_COUNT,
+  NORMAL_FIRST_CHARACTER,
+  NORMAL_SECOND_CHARACTER,
+  NORMAL_THIRD_CHARACTER,
+
+  NORMAL_EXECUTE_COMMAND,
+} normalState_T;
+
+typedef struct
+{
+  cmdarg_T ca;
+  oparg_T *oap;
+  int c;
+  int ctrl_w;
+  int old_col;
+  pos_T old_pos;
+  int mapped_len;
+  int idx;
+#ifdef FEAT_EVAL
+  int set_prevcount;
+  normalState_T state;
+#endif
+
+  int returnState;           // The state we are returning from
+  pos_T returnPriorPosition; // The cursor position prior to running the state
+} normalCmd_T;
+
 void *state_normal_cmd_initialize();
 void state_normal_cmd_cleanup(void *ctx);
 executionStatus_T state_normal_cmd_execute(void *ctx, int key);
